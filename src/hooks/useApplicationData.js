@@ -24,7 +24,7 @@ export default function useApplicationData() {
       [id]: appointment
     };
 
-    return axios.put(`api/appointments/${id}`, { interview }).then(() => setState({ ...state, appointments }), updateSpots(state, state.day, appointments))
+    return axios.put(`/api/appointments/${id}`, { interview }).then(() => setState({ ...state, appointments }), updateSpots(state, state.day, appointments))
   }
 
   function cancelInterview(id) {
@@ -39,7 +39,7 @@ export default function useApplicationData() {
       [id]: appointment
     };
 
-    return axios.delete(`api/appointments/${id}`)
+    return axios.delete(`/api/appointments/${id}`)
       .then(() => setState({ ...state, appointments }), updateSpots(state, state.day, appointments))
 
   }
@@ -67,9 +67,9 @@ export default function useApplicationData() {
 
   useEffect(() => {
     Promise.all([
-      axios.get('api/days'),
-      axios.get('api/appointments'),
-      axios.get('api/interviewers')
+      axios.get('/api/days'),
+      axios.get('/api/appointments'),
+      axios.get('/api/interviewers')
     ]).then((all) => {
       setState(prev => ({ ...prev, days: all[0].data, appointments: all[1].data, interviewers: all[2].data }));
     });
