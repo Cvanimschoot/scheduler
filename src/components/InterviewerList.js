@@ -6,6 +6,7 @@ import "components/InterviewerList.scss"
 
 function InterviewerList(props) {
 
+  // fill out the InterviewerList with interviewers
   const interviewers = props.interviewers.map(interviewer => {
     return (
       <InterviewerListItem

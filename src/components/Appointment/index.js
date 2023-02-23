@@ -10,6 +10,7 @@ import Confirm from './Confirm';
 import Error from './Error';
 import useVisualMode from 'hooks/useVisualMode';
 
+// MODES
 const EMPTY = "EMPTY";
 const SHOW = "SHOW";
 const CREATE = "CREATE";
@@ -22,9 +23,10 @@ const ERROR_DELETE = "ERROR_DELETE";
 
 export default function Appointment(props) {
   const { mode, transition, back } = useVisualMode(
-    props.interview ? SHOW : EMPTY
+    props.interview ? SHOW : EMPTY // If there is an interview show the details or else show the add appointment
   );
 
+  // Save the information from the form
   function save(name, interviewer) {
     const interview = {
       student: name,
@@ -36,6 +38,7 @@ export default function Appointment(props) {
       .catch(error => transition(ERROR_SAVE, true));
   }
 
+  // Cancel the edit/delete
   function cancel(id) {
     transition(DELETING);
     props.cancelInterview(id)

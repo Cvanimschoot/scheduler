@@ -3,6 +3,7 @@ import axios from "axios";
 
 export default function useApplicationData() {
 
+  // State manages the information for each "day"
   const [state, setState] = useState({
     day: "Monday",
     days: [],
@@ -44,6 +45,7 @@ export default function useApplicationData() {
 
   }
 
+  // Used to live update the spots as changes are made in cancelInterview and bookInterview. Otherwise spots are only updated after refresh.
   function updateSpots(state, day, appointments) {
     let count = 0;
     const filteredDay = state.days.filter(days => days.name === day);
@@ -65,6 +67,7 @@ export default function useApplicationData() {
     return count;
   }
 
+  // Axios request to pull all the information into the project before webpage load
   useEffect(() => {
     Promise.all([
       axios.get('/api/days'),
